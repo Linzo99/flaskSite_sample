@@ -1,0 +1,60 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %} {% endblock %}
+
+{% block head %}
+	{{ super() }}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
+{% endblock %}
+
+{% block styles %}
+	{{ super() }}
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='base.css') }}">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+	{% if not session.loged_in %}
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="{{ url_for('index') }}"> MonSite </a>
+				</div>
+				<ul class="nav navbar-nav navbar-right">
+				<li class="active"><a href="{{ url_for('index') }}">Acceuil</a></li>
+					<li ><a href="{{ url_for('signup') }}">S'Inscrire</a></li>
+					<li ><a href="{{ url_for('login') }}">Se Connecter</a></li>
+					<li ><a href="{{ url_for('about') }}">A Propos</a></li>
+				</ul>
+			</div>
+		</nav>
+	{% else %}
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="{{ url_for('index') }}"> MonSite </a>
+				</div>
+				<ul class="nav navbar-nav navbar-right">
+				<li class="active"><a href="{{ url_for('index') }}">Acceuil</a></li>
+					<li ><a href="{{ url_for('signup') }}">S'Inscrire</a></li>
+					<li ><a href="{{ url_for('logout') }}">Se Deconnecter</a></li>
+					<li ><a href="{{ url_for('about') }}">A Propos</a></li>
+				</ul>
+			</div>
+		</nav>
+	{% endif %}
+{% endblock %}
+
+{% block content%}
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+			<div class="alert alert-info alert-dismissible">
+          		{{ message }}
+          		<button class="close" data-dismiss="alert"><span aria-hidden=true></span>&times;</button>
+        	</div>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+{% endblock %}

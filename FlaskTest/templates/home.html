@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %} Accueil {% endblock %}
+
+{% block styles %}
+  {{ super() }}
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  {{ super() }}
+  <div class="col-md-10 col-lg-10">
+	 <div id="summernote"></div>
+    <script>
+      $('#summernote').summernote({
+        placeholder: 'Hello bootstrap 4',
+        tabsize: 2,
+        height: 100
+      });
+    </script>
+  </div>
+{% endblock %}

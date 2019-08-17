@@ -1,0 +1,23 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base.html" %}
+
+{% block title %} S'enregistrer {% endblock %}
+
+{% block styles %}
+	{{ super()}}
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='signup.css') }}">
+{% endblock %}
+
+{% block content %}
+	{{ super() }}
+	<div class="container" style="width: 300px">
+		<form method="POST">
+			{{ form.csrf_token }}
+			{{ wtf.form_field(form.username) }}
+			{{ wtf.form_field(form.password) }}
+			{{ wtf.form_field(form.confirm) }}
+			{{ wtf.form_field(form.email) }}
+			<input type="submit" class="btn btn-primary" name="">
+		</form>
+	</div>
+{% endblock %}
