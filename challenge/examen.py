@@ -3,13 +3,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-TAILLE = 15
-P = 800
-N_MAX = 20
-NB_JOUR = 200
-NB_ML_INIT = 50
-P_MOVE = 0.9
-P_CONT = 0.06
+TAILLE = 15 # Taille de la grille 
+P = 800 # Nombre de pas
+N_MAX = 20 # Nombre max de jour pour guerir
+NB_JOUR = 200 # Nombre de jour pour la sumilation
+NB_ML_INIT = 50 # Nombre initial de malade
+P_MOVE = 0.9 # la probabilité de se déplacer
+P_CONT = 0.06 # la probabilité d'être contaminer
 
 def creation(nb_habit, dim, nb_malad):
 	liste = []
@@ -34,7 +34,8 @@ def deplacement(liste, p_move):
 			# les different mouvement possibles
 			available = [[x, y] for x in x_pos for y in y_pos]
 			available.remove([habit[0], habit[1]])
-			movement = random.choice(available) #on choisit aléatoirement un mouvement
+			#on choisit aléatoirement un mouvement
+			movement = random.choice(available) 
 			habit[0], habit[1] = movement	
 
 	return liste
@@ -47,9 +48,11 @@ def evolution(liste, n_max):
 	return liste
 
 def contagion(liste, dim, p_cont, n_max):
+	# on recupere les malades et leur position
 	malade = list(filter(lambda x : 0 <= x[-1] < n_max , liste))
 	malade_pos = [hab[:-1] for hab in malade]
 	for ind in liste:
+		# On vérifie si la personne est malade ou est guéris
 		if ind not in malade and ind[-1] != n_max:
 			if ind[:-1] in malade_pos:
 				cont = np.random.choice([0, 1], p=[1-p_cont, p_cont])
